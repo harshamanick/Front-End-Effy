@@ -3,6 +3,8 @@ import gClasses from "../../Common.module.scss";
 import cx from "classnames";
 import TextField from "@mui/material/TextField";
 
+// Input base component.
+
 export default function Input(props) {
   const {
     onChange,

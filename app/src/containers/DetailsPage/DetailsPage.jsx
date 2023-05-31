@@ -40,6 +40,8 @@ export default function DetailsPage(props) {
   const data = state?.selectedCompany;
   const userState = useSelector((state) => state.users);
   const userData = userState?.newUser;
+
+  // This onDataChange function handle the company from  data change.
   const onDataChange = (value, type) => {
     let updatedData;
     switch (type) {
@@ -76,6 +78,9 @@ export default function DetailsPage(props) {
     }
     dispatch(companyStateChange({ selectedCompany: updatedData }));
   };
+
+  // This onUserDataChange function handle the user from  data change.
+
   const onUserDataChange = (value, type) => {
     let updatedData;
     switch (type) {

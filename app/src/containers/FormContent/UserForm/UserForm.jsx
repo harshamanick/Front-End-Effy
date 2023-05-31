@@ -8,6 +8,8 @@ import { FormControl, InputLabel, Select } from "@mui/material";
 import { useSelector } from "react-redux";
 import { getDropDownList } from "../../../JsUtilits/Utility";
 
+// This component is used for create and edit user details.
+
 export default function UserForm(props) {
   const state = useSelector((state) => state.companies);
   const [selectedCompany, setSelectedCompany] = useState("");

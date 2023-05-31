@@ -1,4 +1,6 @@
 import { Modal } from "antd";
+
+// Modal Component.
 const ModalView = (props) => {
   const { mainContent, onCancelClick, onCreateClick, isModelOpen, title } =
     props;

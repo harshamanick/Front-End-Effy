@@ -1,3 +1,5 @@
+// This is constants contains common strings.
+
 export const COMPANY_DETAIL = {
   COMPANY_NAME: "company_name",
   ADD_1: "address_1",
