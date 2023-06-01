@@ -27,8 +27,9 @@ export default function UserCard(props) {
   const state = useSelector((state) => state.users);
   const dispatch = useDispatch();
   useEffect(() => {
+    setCurrentData(data);
     setInitialData(data);
-  }, []);
+  }, [data]);
   const onUserDataChange = (value, type) => {
     let updatedData;
     switch (type) {
@@ -62,7 +63,7 @@ export default function UserCard(props) {
           email: value,
         };
         break;
-        case USER_DETAIL.MIGRATE:
+      case USER_DETAIL.MIGRATE:
         updatedData = {
           ...currentData,
           migrate_id: value,
