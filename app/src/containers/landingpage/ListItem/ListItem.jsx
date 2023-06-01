@@ -3,6 +3,7 @@ import cx from "classnames";
 import styles from "./ListItem.module.scss";
 import gClasses from "../../../Common.module.scss";
 import DeleteIcon from "../../../Icons/DeleteIcon";
+import LocationIconIcon from "../../../Icons/LocationIcon";
 export default function ListItem(props) {
   const { onRowClick, data, onDeleteClick } = props;
   return (
@@ -19,7 +20,7 @@ export default function ListItem(props) {
         >
           {data?.company_name}
         </div>
-        <div className={gClasses.Name}>{data?.company_address_2}</div>
+        <div className={gClasses.Name}><div className={cx(gClasses.Dflex, gClasses.Gap5, gClasses.AlignItemCenter)}><LocationIconIcon/>{data?.company_address_2}</div></div>
       </div>
       <div
         onClick={(event) => {
