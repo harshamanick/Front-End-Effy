@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Card } from "antd";
 import UserForm from "../FormContent/UserForm/UserForm";
 import EditIcon from "../../Icons/EditIcon";
-import { Button, checkboxClasses } from "@mui/material";
+import { Button } from "@mui/material";
 import { USER_DETAIL } from "../../CommonStrings/CommonString";
 import { cloneDeep, isEmpty } from "lodash";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +14,6 @@ import {
 import gClasses from "../../Common.module.scss";
 import cx from "classnames";
 import {
-  USER_VALIDATION_SCHEMA,
   validateUser,
 } from "../../Validations/Validation.Schema";
 import DeleteIcon from "../../Icons/DeleteIcon";
