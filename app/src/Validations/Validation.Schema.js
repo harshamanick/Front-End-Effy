@@ -1,6 +1,18 @@
 import Joi from "joi";
 import { constructErrorMessage } from "../JsUtilits/Utility";
 
+export const validateNewCompany = (data) => {
+  const schema = Joi.object({
+    company_name: Joi.string().required().label("Company Name"),
+    company_address_1: Joi.string().required().label("Address"),
+    company_address_2: Joi.string().required().label("Country"),
+    pincode: Joi.string().required("Pincode"),
+    _id: Joi.string().optional(),
+  });
+  const { error } = schema.validate(data, { abortEarly: false });
+  return constructErrorMessage(error);
+};
+
 export const validateUser = (data) => {
   const schema = Joi.object({
     first_name: Joi.string().required().label("First Name"),
@@ -25,6 +37,7 @@ export const validateCompany = (data) => {
     company_address_2: Joi.string().required().label("Country"),
     pincode: Joi.string().required("Pincode"),
     _id: Joi.string().optional(),
+    position: Joi.array().required(),
   });
   const { error } = schema.validate(data, { abortEarly: false });
   return constructErrorMessage(error);

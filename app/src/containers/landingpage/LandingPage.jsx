@@ -15,7 +15,7 @@ import CompanyForm from "../FormContent/CompanyForm/CompanyForm";
 import { COMPANY_DETAIL, NEW_COMPANY } from "../../CommonStrings/CommonString";
 import { cloneDeep, isEmpty } from "lodash";
 import gClasses from "../../Common.module.scss";
-import { validateCompany } from "../../Validations/Validation.Schema";
+import { validateNewCompany } from "../../Validations/Validation.Schema";
 export default function LandingPage() {
   const dispatch = useDispatch();
   const [showDetails, setShowDetails] = useState(false);
@@ -52,7 +52,7 @@ export default function LandingPage() {
         return;
     }
     if (!isEmpty(state?.newCompanyErrorList)) {
-      const errorList = validateCompany(updatedData);
+      const errorList = validateNewCompany(updatedData);
       dispatch(companyStateChange({ newCompanyErrorList: errorList }));
     }
     dispatch(companyStateChange({ newCompany: updatedData }));
@@ -112,7 +112,7 @@ export default function LandingPage() {
           }}
           onCreateClick={() => {
             let temp = cloneDeep(state?.newCompany);
-            const errorList = validateCompany(temp);
+            const errorList = validateNewCompany(temp);
             console.log("???s", errorList);
             if (isEmpty(errorList)) {
               dispatch(createCompany(temp));

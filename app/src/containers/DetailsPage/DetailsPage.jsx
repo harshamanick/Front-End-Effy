@@ -30,6 +30,7 @@ import {
   validateUser,
 } from "../../Validations/Validation.Schema";
 import CloseIcon from "../../Icons/CloseIcon";
+import Location from "../Location/Location";
 
 export default function DetailsPage(props) {
   const { onCloseClick } = props;
@@ -137,6 +138,10 @@ export default function DetailsPage(props) {
       key: "Users",
       tab: "Users",
     },
+    {
+      key: "Location",
+      tab: "Location",
+    },
   ];
   const [activeTabKey2, setActiveTabKey2] = useState("Details");
   const onTab2Change = (key) => {
@@ -228,16 +233,16 @@ export default function DetailsPage(props) {
         onTabChange={onTab2Change}
       >
         {/* {contentListNoTitle[activeTabKey2]} */}
-        {activeTabKey2 === "Details" ? (
+        {activeTabKey2 === "Details" && (
           <CompanyForm
             onDataChange={onDataChange}
             data={data}
             isEdit={isCompanyEdit}
             errorList={state?.companyErrorList}
           />
-        ) : (
-          <Users />
         )}
+        {activeTabKey2 === "Users" && <Users />}
+        {activeTabKey2 === "Location" && <Location />}
       </Card>
       <ModalView
         mainContent={mainContent}
