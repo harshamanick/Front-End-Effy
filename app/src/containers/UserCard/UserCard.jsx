@@ -13,10 +13,9 @@ import {
 } from "../../Redux/Actions/Users.action";
 import gClasses from "../../Common.module.scss";
 import cx from "classnames";
-import {
-  validateUser,
-} from "../../Validations/Validation.Schema";
+import { validateUser } from "../../Validations/Validation.Schema";
 import DeleteIcon from "../../Icons/DeleteIcon";
+import { companyStateChange } from "../../Redux/Actions/Company.action";
 
 export default function UserCard(props) {
   const { data } = props;
@@ -84,16 +83,25 @@ export default function UserCard(props) {
       })
     );
   };
-  const updateUserHandler = () => {
+  const updateUserHandler = async () => {
     let temp = cloneDeep(currentData);
     delete temp.__v;
     const errorList = validateUser(temp);
     if (isEmpty(errorList)) {
-      dispatch(
-        updateUser(temp, () => {
-          setIsEdit(false);
-        })
-      );
+      try {
+        await dispatch(
+          updateUser(temp, () => {
+            setIsEdit(false);
+          })
+        );
+      } catch (error) {
+        dispatch(
+          companyStateChange({
+            isServerErrorMessage: error?.response?.data,
+            isServerError: true,
+          })
+        );
+      }
       dispatch(userStateStateChange({ userErrorList: {} }));
     } else {
       dispatch(userStateStateChange({ userErrorList: errorList }));

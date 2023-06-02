@@ -16,6 +16,7 @@ import { COMPANY_DETAIL, NEW_COMPANY } from "../../CommonStrings/CommonString";
 import { cloneDeep, isEmpty } from "lodash";
 import gClasses from "../../Common.module.scss";
 import { validateNewCompany } from "../../Validations/Validation.Schema";
+import ServerErrorPopup from "../ServerErrorPopup/ServerErrorPopup";
 export default function LandingPage() {
   const dispatch = useDispatch();
   const [showDetails, setShowDetails] = useState(false);
@@ -67,6 +68,7 @@ export default function LandingPage() {
   );
   return (
     <div className={cx(styles.MainContainer)}>
+      {state?.isServerError && <ServerErrorPopup />}
       <Header />
 
       <div
@@ -76,7 +78,11 @@ export default function LandingPage() {
           styles.Body
         )}
       >
-        <div className={styles.Title}>Company List</div>
+        <div className={styles.Title}>
+          {showDetails
+            ? `${state?.companyResponse?.company_name}`
+            : "Company List"}
+        </div>
         <Button
           variant="contained"
           onClick={() => {
@@ -113,16 +119,17 @@ export default function LandingPage() {
           onCreateClick={() => {
             let temp = cloneDeep(state?.newCompany);
             const errorList = validateNewCompany(temp);
-            console.log("???s", errorList);
             if (isEmpty(errorList)) {
-              dispatch(createCompany(temp));
-              dispatch(
-                companyStateChange({
-                  newCompanyErrorList: {},
-                  newCompany: NEW_COMPANY,
-                })
-              );
-              setIsCreateModalOpen(false);
+              try {
+                dispatch(createCompany(temp));
+                dispatch(
+                  companyStateChange({
+                    newCompanyErrorList: {},
+                    newCompany: NEW_COMPANY,
+                  })
+                );
+                setIsCreateModalOpen(false);
+              } catch (error) {}
             } else {
               dispatch(companyStateChange({ newCompanyErrorList: errorList }));
             }

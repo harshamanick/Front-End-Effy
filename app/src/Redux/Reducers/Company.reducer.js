@@ -13,6 +13,8 @@ const initialState = {
   newCompanyErrorList: {},
   companyErrorList: {},
   companyResponse: {},
+  isServerError: false,
+  isServerErrorMessage: " ",
 };
 const CompanyReducer = (state = initialState, action) => {
   switch (action.type) {

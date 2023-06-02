@@ -29,7 +29,6 @@ export const getUsersById = (id) => async (dispatch) => {
 };
 
 export const updateUser = (data, callback) => async (dispatch) => {
-  console.log("ddddd", data);
   try {
     userStateStateChange({ isDataLoading: true });
     const response = await axiosPutUtils(
@@ -43,6 +42,7 @@ export const updateUser = (data, callback) => async (dispatch) => {
     return response;
   } catch (error) {
     console.log("error");
+    throw error;
   }
 };
 export const newUser = (data, callback) => async (dispatch) => {
@@ -59,7 +59,7 @@ export const newUser = (data, callback) => async (dispatch) => {
     callback();
     return response;
   } catch (error) {
-    console.log("error");
+    throw error;
   }
 };
 

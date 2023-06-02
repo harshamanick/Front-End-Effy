@@ -21,6 +21,7 @@ export const axiosPostUtils = async (relativePath, requestBody) => {
     return response?.data;
   } catch (error) {
     console.log("AXIOS-ERROR", error);
+    throw error;
   }
 };
 
@@ -32,6 +33,7 @@ export const axiosPutUtils = async (relativePath, requestBody) => {
     return response?.data;
   } catch (error) {
     console.log("AXIOS-ERROR", error);
+    throw error;
   }
 };
 

@@ -1,0 +1,22 @@
+.MainContainer {
+    width: 400px;
+    height: 70px;
+    border-radius: 10px;
+    background-color: #d85353;
+    color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -70px; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    font-family: inherit;
+;
+    transition: top 1s ease-in-out; 
+  }
+  
+  .MainContainer.visible {
+    top: 115px; 
+  }

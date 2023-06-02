@@ -36,6 +36,7 @@ export const getCompanyDetails = (id) => async (dispatch) => {
       "http://localhost:3000/api/company/details_by_id",
       { id }
     );
+    console.log("zzzzz", response);
     dispatch(
       companyStateChange({
         isDataLoading: false,
@@ -57,7 +58,11 @@ export const updateCompay = (data) => async (dispatch) => {
       data
     );
     dispatch(
-      companyStateChange({ isDataLoading: false, selectedCompany: response })
+      companyStateChange({
+        isDataLoading: false,
+        selectedCompany: response,
+        companyResponse: response,
+      })
     );
     return response;
   } catch (error) {
@@ -65,21 +70,24 @@ export const updateCompay = (data) => async (dispatch) => {
   }
 };
 
-export const createCompany = (data, callback) => async (dispatch) => {
-  try {
-    companyStateChange({ isDataLoading: true });
-    const response = await axiosPostUtils(
-      "http://localhost:3000/api/company/new_company",
-      data
-    );
-    dispatch(
-      companyStateChange({ isDataLoading: false, companyList: response })
-    );
-    callback();
-    return response;
-  } catch (error) {
-  }
-};
+export const createCompany =
+  (data, callback = () => {}) =>
+  async (dispatch) => {
+    try {
+      companyStateChange({ isDataLoading: true });
+      const response = await axiosPostUtils(
+        "http://localhost:3000/api/company/new_company",
+        data
+      );
+      dispatch(
+        companyStateChange({ isDataLoading: false, companyList: response })
+      );
+      callback();
+      return response;
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
 
 export const deleteCompany = (id, callback) => async (dispatch) => {
   try {

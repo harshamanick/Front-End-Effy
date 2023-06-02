@@ -190,28 +190,32 @@ export default function DetailsPage(props) {
                     Cancel
                   </Button>
                 )}
-                <Button
-                  variant="contained"
-                  onClick={() => {
-                    activeTabKey2 !== "Details" && setIsModelOpen(true);
-                    if (activeTabKey2 === "Details") {
-                      let temp = cloneDeep(state?.selectedCompany);
-                      delete temp.__v;
-                      const errorList = validateCompany(temp);
-                      if (isEmpty(errorList)) {
-                        dispatch(updateCompay(temp));
-                        dispatch(companyStateChange({ companyErrorList: {} }));
-                        setIsCompanyEdit(false);
-                      } else {
-                        dispatch(
-                          companyStateChange({ companyErrorList: errorList })
-                        );
+                {activeTabKey2 !== "Location" && (
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      activeTabKey2 !== "Details" && setIsModelOpen(true);
+                      if (activeTabKey2 === "Details") {
+                        let temp = cloneDeep(state?.selectedCompany);
+                        delete temp.__v;
+                        const errorList = validateCompany(temp);
+                        if (isEmpty(errorList)) {
+                          dispatch(updateCompay(temp));
+                          dispatch(
+                            companyStateChange({ companyErrorList: {} })
+                          );
+                          setIsCompanyEdit(false);
+                        } else {
+                          dispatch(
+                            companyStateChange({ companyErrorList: errorList })
+                          );
+                        }
                       }
-                    }
-                  }}
-                >
-                  {activeTabKey2 === "Details" ? "Update" : "Add User"}
-                </Button>
+                    }}
+                  >
+                    {activeTabKey2 === "Details" ? "Update" : "Add User"}
+                  </Button>
+                )}
               </div>
             )}
             {activeTabKey2 === "Details" && !isCompanyEdit && (
@@ -252,23 +256,32 @@ export default function DetailsPage(props) {
           dispatch(userStateStateChange({ newUser: SELECTED_USER_INITIAL }));
           dispatch(userStateStateChange({ newUserErrorList: {} }));
         }}
-        onCreateClick={() => {
+        onCreateClick={async () => {
           let temp = cloneDeep(userState?.newUser);
           temp.company_id = state.selectedCompanyId;
           delete temp.__v;
           const errorList = validateUser(temp);
           if (isEmpty(errorList)) {
-            dispatch(
-              newUser(temp, () => {
-                setIsModelOpen(false);
-              })
-            );
-            dispatch(
-              userStateStateChange({
-                newUserErrorList: {},
-                newUser: SELECTED_USER_INITIAL,
-              })
-            );
+            try {
+              await dispatch(
+                newUser(temp, () => {
+                  setIsModelOpen(false);
+                })
+              );
+              dispatch(
+                userStateStateChange({
+                  newUserErrorList: {},
+                  newUser: SELECTED_USER_INITIAL,
+                })
+              );
+            } catch (error) {
+              dispatch(
+                companyStateChange({
+                  isServerErrorMessage: error?.response?.data,
+                  isServerError: true,
+                })
+              );
+            }
           } else {
             dispatch(userStateStateChange({ newUserErrorList: errorList }));
           }
