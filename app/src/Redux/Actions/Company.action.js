@@ -5,6 +5,7 @@ import {
   axiosPostUtils,
   axiosPutUtils,
 } from "../../axios/axios.utils";
+import { API_URLS } from "../../ApiUrl/ApiUrls";
 
 export const companyStateChange = createAction(
   "COMPANY_STATE_CHANGE",
@@ -19,7 +20,7 @@ export const getCompanies = (data) => async (dispatch) => {
   try {
     companyStateChange({ isDataLoading: true });
     const response = await axiosGetUtils(
-      "http://localhost:3000/api/company/get_all_companies"
+      API_URLS.GET_ALL_COMPANIES
     );
     dispatch(
       companyStateChange({ isDataLoading: false, companyList: response })
@@ -33,7 +34,7 @@ export const getCompanyDetails = (id) => async (dispatch) => {
   try {
     companyStateChange({ isDataLoading: true });
     const response = await axiosGetUtils(
-      "http://localhost:3000/api/company/get_company_details_by_id",
+      API_URLS.GET_COMPANY_DETAILS_BY_ID,
       { id }
     );
     dispatch(
@@ -53,7 +54,7 @@ export const updateCompany = (data) => async (dispatch) => {
   try {
     companyStateChange({ isDataLoading: true });
     const response = await axiosPutUtils(
-      "http://localhost:3000/api/company/update_company_by_id",
+      API_URLS.UPDATE_COMPANY_DETAILS_BY_ID,
       data
     );
     dispatch(
@@ -75,7 +76,7 @@ export const createCompany =
     try {
       companyStateChange({ isDataLoading: true });
       const response = await axiosPostUtils(
-        "http://localhost:3000/api/company/new_company",
+        API_URLS.CREATE_COMPANY,
         data
       );
       dispatch(
@@ -92,7 +93,7 @@ export const deleteCompany = (id, callback) => async (dispatch) => {
   try {
     companyStateChange({ isDataLoading: true });
     const response = await axiosDeleteUtils(
-      "http://localhost:3000/api/company/delete_company_by_id",
+      API_URLS.DELETE_COMPANY_BY_ID,
       { id }
     );
     dispatch(

@@ -5,6 +5,7 @@ import {
   axiosPostUtils,
   axiosPutUtils,
 } from "../../axios/axios.utils";
+import { API_URLS } from "../../ApiUrl/ApiUrls";
 
 export const userStateStateChange = createAction("USER_DATA_CHANGE", (data) => {
   return {
@@ -16,7 +17,7 @@ export const getUsersById = (id) => async (dispatch) => {
   try {
     userStateStateChange({ isDataLoading: true });
     const response = await axiosGetUtils(
-      "http://localhost:3000/api/user/get_all_users_by_id",
+      API_URLS.GET_ALL_USERS,
       { id }
     );
     dispatch(
@@ -32,7 +33,7 @@ export const updateUser = (data, callback) => async (dispatch) => {
   try {
     userStateStateChange({ isDataLoading: true });
     const response = await axiosPutUtils(
-      "http://localhost:3000/api/user/update_user",
+      API_URLS.UPDATE_USER_DETAILS_BY_ID,
       data
     );
     dispatch(
@@ -46,11 +47,10 @@ export const updateUser = (data, callback) => async (dispatch) => {
   }
 };
 export const newUser = (data, callback) => async (dispatch) => {
-  console.log("ddddd", data);
   try {
     userStateStateChange({ isDataLoading: true });
     const response = await axiosPostUtils(
-      "http://localhost:3000/api/user/new_user",
+      API_URLS.CREATE_USER,
       data
     );
     dispatch(
@@ -67,7 +67,7 @@ export const deleteUser = (id, callback) => async (dispatch) => {
   try {
     userStateStateChange({ isDataLoading: true });
     const response = await axiosDeleteUtils(
-      "http://localhost:3000/api/user/delete_user",
+      API_URLS.DELETE_USER_BY_ID,
       { id }
     );
     dispatch(
