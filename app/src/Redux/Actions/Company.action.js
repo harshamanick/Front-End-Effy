@@ -33,10 +33,9 @@ export const getCompanyDetails = (id) => async (dispatch) => {
   try {
     companyStateChange({ isDataLoading: true });
     const response = await axiosGetUtils(
-      "http://localhost:3000/api/company/details_by_id",
+      "http://localhost:3000/api/company/get_company_details_by_id",
       { id }
     );
-    console.log("zzzzz", response);
     dispatch(
       companyStateChange({
         isDataLoading: false,
@@ -54,7 +53,7 @@ export const updateCompay = (data) => async (dispatch) => {
   try {
     companyStateChange({ isDataLoading: true });
     const response = await axiosPutUtils(
-      "http://localhost:3000/api/company/update_company",
+      "http://localhost:3000/api/company/update_company_by_id",
       data
     );
     dispatch(
@@ -93,7 +92,7 @@ export const deleteCompany = (id, callback) => async (dispatch) => {
   try {
     companyStateChange({ isDataLoading: true });
     const response = await axiosDeleteUtils(
-      "http://localhost:3000/api/company/delete_company",
+      "http://localhost:3000/api/company/delete_company_by_id",
       { id }
     );
     dispatch(
