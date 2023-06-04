@@ -49,7 +49,7 @@ export default function UserCard(props) {
           dob: value,
         };
         break;
-      case USER_DETAIL.DESIGINATION:
+      case USER_DETAIL.DESIGNATION:
         updatedData = {
           ...currentData,
           designation: value,

@@ -12,7 +12,7 @@ import ModalView from "../../Components/Modal/Modal";
 import {
   companyStateChange,
   getCompanyDetails,
-  updateCompay,
+  updateCompany,
 } from "../../Redux/Actions/Company.action";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -103,7 +103,7 @@ export default function DetailsPage(props) {
           dob: value,
         };
         break;
-      case USER_DETAIL.DESIGINATION:
+      case USER_DETAIL.DESIGNATION:
         updatedData = {
           ...userState.newUser,
           designation: value,
@@ -200,7 +200,7 @@ export default function DetailsPage(props) {
                         delete temp.__v;
                         const errorList = validateCompany(temp);
                         if (isEmpty(errorList)) {
-                          dispatch(updateCompay(temp));
+                          dispatch(updateCompany(temp));
                           dispatch(
                             companyStateChange({ companyErrorList: {} })
                           );

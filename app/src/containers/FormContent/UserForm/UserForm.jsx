@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Input from "../../../Components/Iput/Input";
+import Input from "../../../Components/Input/Input";
 import cx from "classnames";
 import gClasses from "../../../Common.module.scss";
 import { USERFIELD, USER_DETAIL } from "../../../CommonStrings/CommonString";
@@ -59,14 +59,14 @@ export default function UserForm(props) {
       <div className={cx(gClasses.MT30)}>
         <Input
           onChange={(event) => {
-            onChange(event?.target?.value, USER_DETAIL.DESIGINATION);
+            onChange(event?.target?.value, USER_DETAIL.DESIGNATION);
           }}
           label="Designation"
           value={data?.designation}
           isRequired
           readOnly={!isEdit}
-          error={!isEmpty(errorList?.[USERFIELD?.DESIGINATION])}
-          helperText={errorList?.[USERFIELD?.DESIGINATION]}
+          error={!isEmpty(errorList?.[USERFIELD?.DESIGNATION])}
+          helperText={errorList?.[USERFIELD?.DESIGNATION]}
         />
       </div>
       <div className={cx(gClasses.MT30)}>

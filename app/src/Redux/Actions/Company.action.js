@@ -49,7 +49,7 @@ export const getCompanyDetails = (id) => async (dispatch) => {
   }
 };
 
-export const updateCompay = (data) => async (dispatch) => {
+export const updateCompany = (data) => async (dispatch) => {
   try {
     companyStateChange({ isDataLoading: true });
     const response = await axiosPutUtils(

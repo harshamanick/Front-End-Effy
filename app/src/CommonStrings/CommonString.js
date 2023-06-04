@@ -11,7 +11,7 @@ export const USER_DETAIL = {
   FIRST_NAME: "FirstName",
   LAST_NAME: "LastName",
   DOB: "DOB",
-  DESIGINATION: "Desigination",
+  DESIGNATION: "Designation",
   EMAIL: "Email",
   MIGRATE: 'Migrate',
 };
@@ -35,7 +35,7 @@ export const USERFIELD = {
     FIRST_NAME: "first_name",
     LAST_NAME: "last_name",
     DOB: "dob",
-    DESIGINATION: "designation",
+    DESIGNATION: "designation",
     EMAIL: "email",
   };
 

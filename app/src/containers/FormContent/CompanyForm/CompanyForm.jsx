@@ -2,7 +2,7 @@ import React from "react";
 import gClasses from "../../../Common.module.scss";
 import cx from "classnames";
 import styles from "./CompanyForm.module.scss";
-import Input from "../../../Components/Iput/Input";
+import Input from "../../../Components/Input/Input";
 import {
   COMPANY_DETAIL,
   COMPANY_FIELD,
